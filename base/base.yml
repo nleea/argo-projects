@@ -1,13 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: guestbook
+  name: base_app
 spec:
   destination:
-    namespace: default
+    namespace: base
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: guestbook
-    repoURL: https://github.com/argoproj/argocd-example-apps.git
+    path: base/apps
+    repoURL: https://github.com/nleea/argo-projects.git
     targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
