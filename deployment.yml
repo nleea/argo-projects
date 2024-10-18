@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: base
+  labels:
+    app: base
+spec:
+  selector:
+    matchLabels:
+      app: base
+  replicas: 1
+  template:
+      metadata:
+        labels:
+          app: base
+      spec:
+        containers:
+          - name: base
+            image: nelsonjavier/base_django:v005
+            ports:
+              - containerPort: 8000
+            resources:
+              requests:
+                memory: "100Mi"
+                cpu: "250m"
+              limits:
+                memory: "300Mi"
+                cpu: "500m"
+            envFrom:
+              - configMapRef:
+                  name:  base-env
