@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  namespace: base
+data:
+  postgresql.conf: |
+    listen_addresses = '*'
+    max_connections = 100
+    host    all             all             192.168.80.0/24          md5
+
+
