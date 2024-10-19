@@ -56,4 +56,21 @@ spec:
   clusterIP: None  # Headless Service para StatefulSet
   selector:
     app: postgres
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-external
+  namespace: base
+  labels:
+    app: postgres
+spec:
+  ports:
+  - port: 5432
+    targetPort: 5432
+    name: postgres
+  type: NodePort
+  selector:
+    app: postgres
+
 
