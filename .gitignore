@@ -1,4 +1,3 @@
-base_bd.yml 
 base_env.yml  
 bd_service.yml  
 storage-class.yml  

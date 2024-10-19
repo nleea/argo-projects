@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+  namespace: base
+  labels:
+    app: postgres
+spec:
+  serviceName: "postgres"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:16   # Cambia a la versión de PostgreSQL que prefieras
+        ports:
+        - containerPort: 5432
+          name: postgres
+        env:
+        - name: POSTGRES_USER
+          value: "postgres"     
+        - name: POSTGRES_PASSWORD
+          value: "postgres"    # Contraseña de PostgreSQL
+        - name: POSTGRES_DB
+          value: "base_django"  # Base de datos inicial
+        volumeMounts:
+        - name: postgres-data
+          mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+  - metadata:
+      name: postgres-data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: "base-bd"   # Nombre de tu StorageClass
+      resources:
+        requests:
+          storage: 2Gi              # Tamaño de almacenamiento
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  namespace: base
+  labels:
+    app: postgres
+spec:
+  ports:
+  - port: 5432
+    name: postgres
+  clusterIP: None  # Headless Service para StatefulSet
+  selector:
+    app: postgres
+
