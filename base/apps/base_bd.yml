@@ -44,10 +44,10 @@ spec:
       resources:
         requests:
           storage: 2Gi              # Tamaño de almacenamiento
-  volumes:
-  - name: postgres-config
-    configMap:
-      name: postgres-config
+            #volumes:
+    #- name: postgres-config
+    #configMap:
+      #     name: postgres-config
 ---
 apiVersion: v1
 kind: Service
