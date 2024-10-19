@@ -32,13 +32,10 @@ spec:
         volumeMounts:
         - name: postgres-data
           mountPath: /var/lib/postgresql/data
-            #- name: postgres-config
-          # mountPath: /etc/postgresql
-            # subPath: postgresql.conf
       volumes:
       - name: postgres-config
         configMap:
-          name: postgres-config  # Asegúrate de que este ConfigMap exista
+          name: postgres-config
   volumeClaimTemplates:
   - metadata:
       name: postgres-data
