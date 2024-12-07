@@ -16,7 +16,7 @@ spec:
       spec:
         containers:
           - name: base
-            image: nelsonjavier/base_django:v003
+            image: nelsonjavier/base_django:v004
             ports:
               - containerPort: 8000
             resources:
